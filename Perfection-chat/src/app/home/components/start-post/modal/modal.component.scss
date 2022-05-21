@@ -1,0 +1,37 @@
+.heading {
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    icon-button{
+        padding: 0;
+        background-color: #9370DB;
+    }
+}
+
+ion-grid ion-button{
+    --border-width: 1px;
+    height: 30px;
+    width: 100px;
+    ion-icon{
+        font-size: 16px;
+    }
+    .view-status{
+        margin: 0 6px;
+        font-style: italic;
+    }
+    .ion-margin{
+    margin-top: -2px;
+}
+}
+
+.view-status{
+    margin: 0 6px;
+    font-style: italic;
+}
+
+.action-items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

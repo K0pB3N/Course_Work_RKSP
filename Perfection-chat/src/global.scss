@@ -37,3 +37,32 @@
     --background: none;
   }
 }
+.publication-post {
+  color: #000000;
+  --width: 600px;
+  --height: 410px;
+  margin-top: -300px;
+  ion-grid {
+    margin: 0;
+    padding-bottom: 0;
+  }
+  ion-textarea {
+    --padding-top: 0;
+  }
+  
+}
+
+.item-divider {
+  border-bottom: 1px solid #C0C0C0;
+}
+
+ion-button{
+  text-transform: initial;
+}
+
+ion-button{
+  ion-text{
+    margin-left: 4px;
+  }
+}
+

@@ -1,0 +1,14 @@
+:host {
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: start;
+}
+
+.content-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 1200px;
+  margin: 40px auto 0;
+}
+/*# sourceMappingURL=home.page.css.map */

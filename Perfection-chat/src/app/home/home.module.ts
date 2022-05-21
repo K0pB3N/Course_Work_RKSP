@@ -6,15 +6,20 @@ import { HomePage } from './home.page';
 
 import { HomePageRoutingModule } from './home-routing.module';
 import { HeaderComponent } from './components/header/header.component';
-
+import { ProfileSummaryComponent } from './components/profile-summary/profile-summary.component';
+import { StartPostComponent } from './components/start-post/start-post.component';
+import { AdvertisingComponent } from './components/advertising/advertising.component';
+import { ModalComponent } from './components/start-post/modal/modal.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule
+  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
+  declarations: [
+    HomePage,
+    HeaderComponent,
+    ProfileSummaryComponent,
+    StartPostComponent,
+    AdvertisingComponent,
+    ModalComponent,
   ],
-  declarations: [HomePage, HeaderComponent]
 })
 export class HomePageModule {}
