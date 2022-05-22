@@ -1,0 +1,52 @@
+<div class="all-posts-container">
+  <ion-content>
+    <ion-list>
+      <ion-card *ngFor="let post of allLoadedPosts">
+        <ion-grid>
+          <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-col size="auto" class="ion-padding">
+              <ion-avatar>
+                <ion-img src="../../../../assets/avatar_me.jpg"></ion-img>
+              </ion-avatar>
+            </ion-col>
+            <ion-col>
+              <div class="full-name">Хусейн Эртек</div>
+              <div class="role">Full-stack разработчик</div>
+              <div class="meta-data">
+                1д<ion-icon name="ellipse"></ion-icon> Изменено
+                <ion-icon name="ellipse"></ion-icon>
+                <ion-icon color="dark" name="globe-outline"></ion-icon>
+              </div>
+            </ion-col>
+          </ion-row>
+          <p class="post-body">{{ post.body }}</p>
+          <ion-row>
+            <ion-button color="danger" fill="clear">
+              <ion-icon name="thumbs-up-outline" color="medium"></ion-icon>
+              <ion-text color="medium">Нравится</ion-text>
+            </ion-button>
+            <ion-button color="danger" fill="clear">
+              <ion-icon
+                name="chatbox-ellipses-outline"
+                color="medium"
+              ></ion-icon>
+              <ion-text color="medium">Комментировать</ion-text>
+            </ion-button>
+            <ion-button color="danger" fill="clear">
+              <ion-icon name="paper-plane-outline" color="medium"></ion-icon>
+              <ion-text color="medium">Поделиться</ion-text>
+            </ion-button>
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-list>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Загрузка новых постов...">
+    </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-content>
+  <div class="hide-scroll"></div>
+</div>

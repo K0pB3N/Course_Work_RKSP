@@ -1,8 +1,11 @@
 ion-card{
     width: 230px;
     box-shadow: none;
-    border: 1px solid #e1e1e1;
+    border: 1px solid #a34f8ec4;
     margin-left: 0px;
+    ion-card-subtitle{
+        font-weight: 600;
+    }
 }
 
 .backdrop {
@@ -44,7 +47,6 @@ ion-card-header {
 }
 
 ion-card-content div{
-    color: gray;
     display: flex;
     justify-content: space-between;
 
