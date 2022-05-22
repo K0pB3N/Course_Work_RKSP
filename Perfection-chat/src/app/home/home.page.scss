@@ -1,19 +1,33 @@
 :host {
-  justify-content: start;
+  display: flex;
+  justify-content: flex-start;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
 .content-container {
   display: flex;
   width: 1200px;
   margin: 40px auto 0;
+  @media (max-width: 1250px){
+    width: auto;
+    justify-content: center;
+    margin-top: 0;
+  }
 }
 
 app-all-posts,
 .post-divider {
   margin: 0 12px;
+  border-bottom: 1px solid var(--ion-color-medium-tint);
 }
+
 
 .post-divider {
   padding-top: 8px;
   margin: 0 12px;
+}
+
+app-tabs{
+  margin-top: auto;
 }

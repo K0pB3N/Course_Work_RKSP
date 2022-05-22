@@ -1,7 +1,13 @@
 <div>
   <div class="heading ion-padding">
     <ion-text>Создать пост</ion-text>
-    <ion-button (click)="onDismiss()" size="small" color="light" fill="clear" shape="round">
+    <ion-button
+      (click)="onDismiss()"
+      size="small"
+      color="dark"
+      fill="clear"
+      shape="round"
+    >
       <ion-icon slot="icon-only" size="large" name="close-outline"></ion-icon>
     </ion-button>
   </div>
@@ -20,12 +26,12 @@
         <ion-button size="small" color="tertiary" shape="round" fill="outline">
           <ion-icon name="globe-outline"></ion-icon>
           <ion-text class="view-status">Все</ion-text>
-          <ion-icon  name="caret-down-outline"></ion-icon>
+          <ion-icon name="caret-down-outline"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <form #form="ngForm" (ngSumbit)="onPost()" class="ion-padding">
+  <form #form="ngForm" (ngSubmit)="onPost()" class="ion-padding">
     <ion-textarea
       rows="5"
       placeholder="Делитесь с друзьями и коллегами обо всем на свете!"
@@ -33,7 +39,8 @@
       ngModel
       name="body"
       required
-    ></ion-textarea>
+    >
+  </ion-textarea>
     <ion-button color="tertiary" fill="clear">Добавить хэштег</ion-button>
     <div class="action-items">
       <div>
@@ -44,8 +51,8 @@
             name="add"
           ></ion-icon
         ></ion-button>
-        <ion-button size="small" color="tertiary" shape="round" fill="clear"
-          ><ion-icon
+        <ion-button size="small" color="tertiary" shape="round" fill="clear">
+          <ion-icon
             class="ion-padding-none"
             slot="icon-only"
             name="image-outline"
@@ -67,13 +74,16 @@
         ></ion-button>
         <ion-button size="small" shape="round" color="tertiary" fill="clear">
           <ion-icon
-          class="ion-padding-none"
-          name="chatbox-ellipses-outline"
-        ></ion-icon>
-        <ion-text class="view-status">Все</ion-text>
+            class="ion-padding-none"
+            name="chatbox-ellipses-outline"
+          ></ion-icon>
+          <ion-text class="view-status">Все</ion-text>
         </ion-button>
       </div>
-      <ion-button [disabled]="!form.valid" type="sumbit" color="tertiary" class="ion-margin">Опубликовать</ion-button>
+      <ion-button [disabled]="!form.valid" color="tertiary" type="submit" class="ion-margin"
+        >Опубликовать</ion-button
+      >
     </div>
   </form>
 </div>
+

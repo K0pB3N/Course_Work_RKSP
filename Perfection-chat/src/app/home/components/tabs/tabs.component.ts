@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { ModalComponent } from './modal/modal.component';
+import { ModalComponent } from '../start-post/modal/modal.component';
 
 @Component({
-  selector: 'app-start-post',
-  templateUrl: './start-post.component.html',
-  styleUrls: ['./start-post.component.scss'],
+  selector: 'app-tabs',
+  templateUrl: './tabs.component.html',
+  styleUrls: ['./tabs.component.scss'],
 })
-export class StartPostComponent implements OnInit {
-  constructor(public modalController: ModalController) {}
+export class TabsComponent implements OnInit {
+
+  constructor(public modalController: ModalController) { }
 
   ngOnInit() {}
 
-  async presentModal() {
+  async presentModal(){
     const modal = await this.modalController.create({
       component: ModalComponent,
       cssClass: 'publication-post',
@@ -22,8 +23,7 @@ export class StartPostComponent implements OnInit {
     if (data) {
       console.log('data exists!');
     }
-    console.log('role: ', role, 'data:', data);
+    console.log('role: ', role, "data: ", data);
   }
+
 }
-
-
