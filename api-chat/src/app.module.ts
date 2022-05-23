@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { FeedModule } from './feed/feed.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { FeedModule } from './feed/feed.module';
       synchronize: true, // возможна потеря данных при продакшине
 }),
     FeedModule,
+    AuthModule,
 ],
   controllers: [AppController],
   providers: [AppService],
