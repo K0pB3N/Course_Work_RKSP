@@ -24,6 +24,7 @@ import { TabsComponent } from './components/tabs/tabs.component';
     ModalComponent,
     AllPostsComponent,
     TabsComponent,
+    
   ],
 })
 export class HomePageModule {}
