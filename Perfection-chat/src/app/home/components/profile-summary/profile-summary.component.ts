@@ -36,14 +36,14 @@ export class ProfileSummaryComponent implements OnInit {
         return {
           colorOne: '#510364',
           colorTwo: '#7e2372',
-          colorThree: '#fafad2',
+          colorThree: '#bb7cbd',
         };
 
       case 'headmaster':
         return {
           colorOne: '#bc8f8f',
           colorTwo: '#c09999',
-          colorThree: '#bb7cbd',
+          colorThree: '#fafad2',
         };
       default:
         return this.bannerColors;
