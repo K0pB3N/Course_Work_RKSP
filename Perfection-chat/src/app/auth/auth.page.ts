@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators, } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NewUser } from './models/newUser.model';
+
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-auth',
@@ -7,46 +11,44 @@ import { FormControl, FormGroup, NgForm, Validators, } from '@angular/forms';
   styleUrls: ['./auth.page.scss'],
 })
 export class AuthPage implements OnInit {
-  title = 'email-of-company';
-  userEmail = new FormGroup({
-    companyEmail: new FormControl('', [
-      Validators.required,
-      Validators.pattern('@teams.ru'),
-    ]),
-  });
+  // title = 'email-of-company';
+  // userEmail = new FormGroup({
+  //   companyEmail: new FormControl('', [
+  //     Validators.required,
+  //     Validators.pattern('@teams.ru'),
+  //   ]),
+  // });
 
   @ViewChild('form') form: NgForm;
   submissionType: 'login' | 'join' = 'login';
 
-  constructor() {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}
 
   onSubmit() {
     const { email, password } = this.form.value;
-    const sub_of_email = '@teams.ru';
+    // const sub_of_email = '@teams.ru';
     if (!email || !password) return;
 
     if (this.submissionType === 'login') {
-      console.log(1, 'handle login', email, password);
-      if (!email.includes(sub_of_email)) {
-        console.log(5, 'Неверный формат электронной почты!');
-      }
+      return this.authService.login(email, password).subscribe(() => {
+        this.router.navigateByUrl('/home');
+      });
     } else if (this.submissionType === 'join') {
       const { firstName, lastName, middleName } = this.form.value;
       if (!firstName || !lastName || !middleName) return;
-      console.log(
-        2,
-        'handle join',
-        email,
-        password,
+      const newUser: NewUser = {
         firstName,
         lastName,
-        middleName
-      );
-      if (!email.includes(sub_of_email)) {
-        console.log(5, 'Неверный формат электронной почты!');
-      }
+        middleName,
+        email,
+        password,
+      };
+
+      return this.authService.register(newUser).subscribe(() => {
+        this.toggleText();
+      });
     }
   }
 

@@ -14,7 +14,7 @@ export class AuthService {
   constructor(
     @InjectRepository(UserEntity)
     private readonly userRepository: Repository<UserEntity>,
-    private jwtService: JwtService
+    private jwtService: JwtService,
   ) {}
 
   hashPassword(password: string): Observable<string> {
@@ -26,47 +26,64 @@ export class AuthService {
 
     return this.hashPassword(password).pipe(
       switchMap((hashedPassword: string) => {
-        return from(this.userRepository.save({
+        return from(
+          this.userRepository.save({
             firstName,
             lastName,
             middleName,
             email,
-            password: hashedPassword
-        })).pipe(
-            map((user: User) => {
-                delete user.password;
-                return user;
-            })
+            password: hashedPassword,
+          }),
+        ).pipe(
+          map((user: User) => {
+            delete user.password;
+            return user;
+          }),
         );
       }),
     );
   }
 
   validateUser(email: string, password: string): Observable<User> {
-    return from(this.userRepository.findOne({ email }, {select: ['id', 'firstName', 'lastName', 'middleName',, 'email', 'password', 'role']})).pipe(
-
-        switchMap((user: User) => 
-            from(bcrypt.compare(password,  user.password)).pipe(
-                map((isValidPassword: boolean) =>{
-                    if (isValidPassword) {
-                        delete user.password;
-                        return user;
-                    }
-                })
-            )
-        )
-    )
+    return from(
+      this.userRepository.findOne(
+        { email },
+        {
+          select: [
+            'id',
+            'firstName',
+            'lastName',
+            'middleName',
+            ,
+            'email',
+            'password',
+            'role',
+          ],
+        },
+      ),
+    ).pipe(
+      switchMap((user: User) =>
+        from(bcrypt.compare(password, user.password)).pipe(
+          map((isValidPassword: boolean) => {
+            if (isValidPassword) {
+              delete user.password;
+              return user;
+            }
+          }),
+        ),
+      ),
+    );
   }
 
-  login(user: User): Observable<string>{
-      const { email, password} = user;
-      return this.validateUser(email, password).pipe(
-          switchMap((user: User) => {
-              if (user) {
-                // создание JWT - реквизитов
-                return from(this.jwtService.signAsync({ user }))
-              }
-          }),
-      );
+  login(user: User): Observable<string> {
+    const { email, password } = user;
+    return this.validateUser(email, password).pipe(
+      switchMap((user: User) => {
+        if (user) {
+          // создание JWT - реквизитов
+          return from(this.jwtService.signAsync({ user }));
+        }
+      }),
+    );
   }
 }
