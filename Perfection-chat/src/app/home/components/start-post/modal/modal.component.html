@@ -1,6 +1,6 @@
 <div>
   <div class="heading ion-padding">
-    <ion-text>Создать пост</ion-text>
+    <ion-text>{{ postId ? "Изменить" : "Создать" }} пост</ion-text>
     <ion-button
       (click)="onDismiss()"
       size="small"
@@ -40,7 +40,7 @@
       name="body"
       required
     >
-  </ion-textarea>
+    </ion-textarea>
     <ion-button color="tertiary" fill="clear">Добавить хэштег</ion-button>
     <div class="action-items">
       <div>
@@ -80,10 +80,9 @@
           <ion-text class="view-status">Все</ion-text>
         </ion-button>
       </div>
-      <ion-button [disabled]="!form.valid" color="tertiary" type="submit" class="ion-margin"
-        >Опубликовать</ion-button
-      >
+      <ion-button [disabled]="!form.valid" type="submit" class="ion-margin">{{
+        postId ? "Изменить" : "Опубликовать"
+      }}</ion-button>
     </div>
   </form>
 </div>
-

@@ -18,6 +18,24 @@
                 <ion-icon color="dark" name="globe-outline"></ion-icon>
               </div>
             </ion-col>
+            <ion-col
+              *ngIf="(userId$ | async) === post.author.id"
+              style="margin-top: -32px"
+              class="ion-text-right"
+            >
+              <ion-icon
+                (click)="presentUpdateModal(post.id)"
+                style="font-size: 18px; cursor: pointer; margin-right: 10px"
+                color="dark"
+                name="create-outline"
+              ></ion-icon>
+              <ion-icon
+                (click)="deletePost(post.id)"
+                style="font-size: 18px; cursor: pointer; margin-right: 10px"
+                color="danger"
+                name="trash-outline"
+              ></ion-icon>
+            </ion-col>
           </ion-row>
           <p class="post-body">{{ post.body }}</p>
           <ion-row>
@@ -44,8 +62,9 @@
     <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content
         loadingSpinner="bubbles"
-        loadingText="Загрузка новых постов...">
-    </ion-infinite-scroll-content>
+        loadingText="Загрузка новых постов..."
+      >
+      </ion-infinite-scroll-content>
     </ion-infinite-scroll>
   </ion-content>
   <div class="hide-scroll"></div>
