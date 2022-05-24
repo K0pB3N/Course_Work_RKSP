@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -54,7 +53,6 @@ export class AuthService {
             'firstName',
             'lastName',
             'middleName',
-            ,
             'email',
             'password',
             'role',
@@ -83,6 +81,17 @@ export class AuthService {
           // создание JWT - реквизитов
           return from(this.jwtService.signAsync({ user }));
         }
+      }),
+    );
+  }
+
+  findUserById(id: number): Observable<User> {
+    return from(
+      this.userRepository.findOne({ id }, { relations: ['feedPosts'] }),
+    ).pipe(
+      map((user: User) => {
+        delete user.password;
+        return user;
       }),
     );
   }
