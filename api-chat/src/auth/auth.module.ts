@@ -22,6 +22,6 @@ import { UserController } from './controllers/user.controller';
   ],
   providers: [AuthService, JwtGuard, JwtStrategy, RolesGuard, UserService],
   controllers: [AuthController, UserController],
-  exports: [AuthService],
+  exports: [AuthService, UserService],
 })
 export class AuthModule {}
