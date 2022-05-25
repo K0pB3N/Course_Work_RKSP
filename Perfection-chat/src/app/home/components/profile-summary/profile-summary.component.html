@@ -13,14 +13,19 @@
       [style.background]="bannerColors.colorThree"
       class="background-three"
     ></div>
-
   </div>
   <ion-card-header class="ion-text-center">
-    <ion-avatar class="ion-margin-auto"><ion-img src="../../../../assets/avatar_me.jpg"></ion-img></ion-avatar>
+    <input
+      #fileUpload
+      (change)="onFileSelect($event)"
+      style="display: none"
+      type="file"
+    />
+    <ion-avatar class="ion-margin-auto"
+      ><ion-img src="../../../../assets/avatar_me.jpg"></ion-img
+    ></ion-avatar>
 
-    <ion-card-title class="ion-margin-top">
-      Хусейн Эртек
-    </ion-card-title>
+    <ion-card-title class="ion-margin-top">{{ fullName }}</ion-card-title>
     <ion-card-subtitle>Full-stack разработчик</ion-card-subtitle>
   </ion-card-header>
 

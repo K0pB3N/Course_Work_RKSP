@@ -1,8 +1,6 @@
 import { Post } from "src/app/home/models/Post";
 
-
 export type Role = 'admin' | 'headmaster' | 'user';
-
 
 export interface User {
     id: number;

@@ -31,7 +31,7 @@ import {
     // uploadImage(
     //   @UploadedFile() file: Express.Multer.File,
     //   @Request() req,
-    // ): Observable<UpdateResult | { error: string }> {
+    //   ): Observable<{ modifiedFileName: string } | { error: string }> {
     //   const fileName = file?.filename;
   
     //   if (!fileName) return of({ error: 'File must be a png, jpg/jpeg' });
@@ -43,12 +43,11 @@ import {
     //     switchMap((isFileLegit: boolean) => {
     //       if (isFileLegit) {
     //         const userId = req.user.id;
-    //         return this.userService.updateUserImageById(userId, fileName);
-    //       }
-    //       removeFile(fullImagePath);
-    //       return of({ error: 'File content does not match extension!' });
-    //     }),
-    //   );
+    //          return this.userService.updateUserImageById(userId, fileName).pipe(
+          //    map(() => ({
+          //     modifiedFileName: file.filename,
+          //   })),
+          // );
     // }
   
     @UseGuards(JwtGuard)
@@ -61,4 +60,17 @@ import {
         }),
       );
     }
+
+    @UseGuards(JwtGuard)
+  @Get('image-name')
+  findUserImageName(@Request() req): Observable<{ imageName: string }> {
+    const userId = req.user.id;
+    return this.userService.findImageNameByUserId(userId).pipe(
+      switchMap((imageName: string) => {
+        return of({ imageName });
+      }),
+    );
   }
+}
+
+  
