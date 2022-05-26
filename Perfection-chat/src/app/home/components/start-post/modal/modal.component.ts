@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss'],
 })
-export class ModalComponent implements OnInit, OnDestroy {
+export class ModalComponent implements OnInit{
   @ViewChild('form') form: NgForm;
 
   @Input() postId?: number;
@@ -19,7 +19,7 @@ export class ModalComponent implements OnInit, OnDestroy {
   fullName = '';
 
   userFullImagePath: string;
-  private userImagePathSubscription: Subscription;
+  // private userImagePathSubscription: Subscription;
 
   constructor(
     public modalController: ModalController,
@@ -57,7 +57,7 @@ export class ModalComponent implements OnInit, OnDestroy {
     );
   }
 
-  ngOnDestroy() {
-    this.userImagePathSubscription.unsubscribe();
-  }
+  // ngOnDestroy() {
+  //   this.userImagePathSubscription.unsubscribe();
+  // }
 }

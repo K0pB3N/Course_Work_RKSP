@@ -77,23 +77,23 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getDefaultFullImagePath(): string {
-    return 'http://localhost:3000/api-chat/feed/images/blank-profile-picture.png';
-  }
+  // getDefaultFullImagePath(): string {
+  //   return 'http://localhost:3000/api-chat/feed/images/blank-profile-picture.png';
+  // }
 
-  getFullImagePath(imageName: string): string {
-    return 'http://localhost:3000/api/feed/image/' + imageName;
-  }
+  // getFullImagePath(imageName: string): string {
+  //   return 'http://localhost:3000/api-chat/feed/image/' + imageName;
+  // }
 
-  getUserImage() {
-    return this.http.get(`${environment.baseApiUrl}/user/images`).pipe(take(1));
-  }
+  // getUserImage() {
+  //   return this.http.get(`${environment.baseApiUrl}/user/images`).pipe(take(1));
+  // }
 
-  getUserImageName(): Observable<{ imageName: string }> {
-    return this.http
-      .get<{ imageName: string }>(`${environment.baseApiUrl}/user/image-name`)
-      .pipe(take(1));
-  }
+  // getUserImageName(): Observable<{ imageName: string }> {
+  //   return this.http
+  //     .get<{ imageName: string }>(`${environment.baseApiUrl}/user/image-name`)
+  //     .pipe(take(1));
+  // }
 
   // updateUserImagePath(imagePath: string): Observable<User> {
   //   return this.user$.pipe(

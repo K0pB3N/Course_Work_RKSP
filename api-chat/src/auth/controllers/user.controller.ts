@@ -7,6 +7,9 @@ import {
     Request,
     Get,
     Res,
+    Param,
+    Put,
+    Body,
   } from '@nestjs/common';
   import { FileInterceptor } from '@nestjs/platform-express';
   import { join } from 'path';
@@ -19,6 +22,11 @@ import {
   //   saveImageToStorage,
   //   removeFile,
   // } from '../helpers/image-storage';
+  import {
+    FriendRequest,
+    FriendRequestStatus,
+  } from '../models/friend-request.interface';
+  import { User } from '../models/user.interface';
   import { UserService } from '../services/user.service';
   
   @Controller('user')
@@ -50,26 +58,74 @@ import {
           // );
     // }
   
-    @UseGuards(JwtGuard)
-    @Get('image')
-    findImage(@Request() req, @Res() res): Observable<Object> {
-      const userId = req.user.id;
-      return this.userService.findImageNameByUserId(userId).pipe(
-        switchMap((imageName: string) => {
-          return of(res.sendFile(imageName, { root: './images' }));
-        }),
-      );
-    }
+    // @UseGuards(JwtGuard)
+    // @Get('image')
+    // findImage(@Request() req, @Res() res): Observable<Object> {
+    //   const userId = req.user.id;
+    //   return this.userService.findImageNameByUserId(userId).pipe(
+    //     switchMap((imageName: string) => {
+    //       return of(res.sendFile(imageName, { root: './images' }));
+    //     }),
+    //   );
+    // }
 
-    @UseGuards(JwtGuard)
-  @Get('image-name')
-  findUserImageName(@Request() req): Observable<{ imageName: string }> {
-    const userId = req.user.id;
-    return this.userService.findImageNameByUserId(userId).pipe(
-      switchMap((imageName: string) => {
-        return of({ imageName });
-      }),
+  // @UseGuards(JwtGuard)
+  // @Get('image-name')
+  // findUserImageName(@Request() req): Observable<{ imageName: string }> {
+  //   const userId = req.user.id;
+  //   return this.userService.findImageNameByUserId(userId).pipe(
+  //     switchMap((imageName: string) => {
+  //       return of({ imageName });
+  //     }),
+  //   );
+  // }
+
+  @UseGuards(JwtGuard)
+  @Get(':userId')
+  findUserById(@Param('userId') userStringId: string): Observable<User> {
+    const userId = parseInt(userStringId);
+    return this.userService.findUserById(userId);
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('friend-request/send/:receiverId')
+  sendFriendRequest(
+    @Param('receiverId') receiverStringId: string,
+    @Request() req,
+  ): Observable<FriendRequest | { error: string }> {
+    const receiverId = parseInt(receiverStringId);
+    return this.userService.sendFriendRequest(receiverId, req.user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('friend-request/status/:receiverId')
+  getFriendRequestStatus(
+    @Param('receiverId') receiverStringId: string,
+    @Request() req,
+  ): Observable<FriendRequestStatus> {
+    const receiverId = parseInt(receiverStringId);
+    return this.userService.getFriendRequestStatus(receiverId, req.user);
+  }
+
+  @UseGuards(JwtGuard)
+  @Put('friend-request/response/:friendRequestId')
+  respondToFriendRequest(
+    @Param('friendRequestId') friendRequestStringId: string,
+    @Body() statusResponse: FriendRequestStatus,
+  ): Observable<FriendRequestStatus> {
+    const friendRequestId = parseInt(friendRequestStringId);
+    return this.userService.respondToFriendRequest(
+      statusResponse.status,
+      friendRequestId,
     );
+  }
+
+  @UseGuards(JwtGuard)
+  @Get('friend-request/me/received-requests')
+  getFriendRequestsFromRecipients(
+    @Request() req,
+  ): Observable<FriendRequestStatus[]> {
+    return this.userService.getFriendRequestsFromRecipients(req.user);
   }
 }
 

@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/auth/services/auth.service';
 })
 export class PopoverComponent implements OnInit {
   userFullImagePath: string;
-  private userImagePathSubscription: Subscription;
+  // private userImagePathSubscription: Subscription;
 
   fullName$ = new BehaviorSubject<string>(null);
   fullName = '';

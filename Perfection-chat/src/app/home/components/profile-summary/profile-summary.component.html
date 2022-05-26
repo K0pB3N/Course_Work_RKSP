@@ -1,26 +1,32 @@
 <ion-card>
-  <div [style.background]="bannerColors.colorTwo" class="backdrop">
+  <div
+    [style.background]="this.bannerColorService.bannerColors.colorTwo"
+    class="backdrop"
+  >
     <div
-      [style.background]="bannerColors.colorOne"
+      [style.background]="this.bannerColorService.bannerColors.colorOne"
       class="background-one"
     ></div>
-    <div [style.background]="bannerColors.colorOne" class="half-ellipse"></div>
     <div
-      [style.background]="bannerColors.colorTwo"
+      [style.background]="this.bannerColorService.bannerColors.colorOne"
+      class="half-ellipse"
+    ></div>
+    <div
+      [style.background]="this.bannerColorService.bannerColors.colorTwo"
       class="background-two"
     ></div>
     <div
-      [style.background]="bannerColors.colorThree"
+      [style.background]="this.bannerColorService.bannerColors.colorThree"
       class="background-three"
     ></div>
   </div>
   <ion-card-header class="ion-text-center">
-    <input
+    <!-- <input
       #fileUpload
       (change)="onFileSelect($event)"
       style="display: none"
       type="file"
-    />
+    /> -->
     <ion-avatar class="ion-margin-auto"
       ><ion-img src="../../../../assets/avatar_me.jpg"></ion-img
     ></ion-avatar>
@@ -33,8 +39,8 @@
 
   <ion-card-content>
     <div>
-      <span>Друзья</span>
-      <ion-text color="tertiary">162</ion-text>
+      <span>Написано статей</span>
+      <ion-text color="tertiary">12</ion-text>
     </div>
     <div class="connections">
       <span>Подключений</span>

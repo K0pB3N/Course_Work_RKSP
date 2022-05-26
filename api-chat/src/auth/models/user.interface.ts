@@ -9,7 +9,7 @@ export interface User {
     middleName?: string;
     email?: string;
     password?: string;
-    imagePath?: string;
+    // imagePath?: string;
     role?: Role;
     posts?: FeedPost[];
 }
