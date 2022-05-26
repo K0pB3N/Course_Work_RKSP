@@ -59,7 +59,11 @@
             </ion-badge>
                     <div>Коллеги</div>
               </ion-col>
-              <ion-col (click)="presentPopover($event)" size="auto">
+              <ion-col
+              class="popover-menu"
+              (click)="presentPopover($event)"
+              size="auto"
+            >
                   <ion-avatar>
                     <ion-img src="../../../../assets/avatar_me.jpg"></ion-img>
                   </ion-avatar>
