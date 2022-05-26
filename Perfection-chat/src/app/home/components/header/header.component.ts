@@ -27,10 +27,18 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    // this.userImagePathSubscription =
-    //   this.authService.userFullImagePath.subscribe((fullImagePath: string) => {
-    //     this.userFullImagePath = fullImagePath;
-    //   });
+    // this.authService
+    // .getUserImageName()
+    // .pipe(
+    //   take(1),
+    //   tap(({ imageName }) => {
+    //     const defaultImagePath = 'blank-profile-picture.png';
+    //     this.authService
+    //       .updateUserImagePath(imageName || defaultImagePath)
+    //       .subscribe();
+    //   })
+    // )
+    // .subscribe();
 
     this.friendRequestsSubscription = this.connectionProfileService
       .getFriendRequests()
