@@ -12,10 +12,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
-import { Roles } from 'src/auth/decorators/roles.decorator';
-import { JwtGuard } from 'src/auth/guards/jwt.guard';
-import { RolesGuard } from 'src/auth/guards/roles.guard';
-import { Role } from 'src/auth/models/role.enum';
+import { JwtGuard } from '../../auth/guards/jwt.guard';
 import { DeleteResult, UpdateResult } from 'typeorm';
 import { IsCreatorGuard } from '../guards/is-creator.guard';
 
