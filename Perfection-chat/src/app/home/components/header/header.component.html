@@ -2,7 +2,7 @@
   <ion-toolbar>
     <div class="toolbar-wrapper">
       <ion-buttons slot="start" class="ion-no-padding">
-        <ion-button>
+        <ion-button style="cursor: pointer" [routerLink]="['/home']">
             <ion-icon      
               class="chat-logo"   
               name="logo-wechat"
@@ -14,11 +14,21 @@
 
         <ion-grid>
           <ion-row class="ion-justify-content-end">
-              <ion-col class="ion-hide-md-down" size="auto">
+            <ion-col
+            style="cursor: pointer"
+            [routerLink]="['/home']"
+            class="ion-hide-md-down"
+            size="auto"
+          >
                   <ion-icon name="home"></ion-icon>
                     <div>Главная</div>
               </ion-col>
-              <ion-col class="ion-hide-md-down" size="auto">
+              <ion-col
+              style="cursor: pointer"
+              [routerLink]="['/home/chat/connections']"
+              class="ion-hide-md-down"
+              size="auto"
+            >
                 <ion-icon name="chatbox-ellipses"></ion-icon>
                       <div>Сообщения</div>
                     </ion-col>
@@ -60,6 +70,7 @@
                     <div>Коллеги</div>
               </ion-col>
               <ion-col
+              style="cursor: pointer"
               class="popover-menu"
               (click)="presentPopover($event)"
               size="auto"
