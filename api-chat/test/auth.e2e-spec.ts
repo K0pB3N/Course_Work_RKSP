@@ -1,17 +1,17 @@
 import { HttpStatus } from '@nestjs/common';
+
 import * as jwt from 'jsonwebtoken';
 import * as request from 'supertest';
 
 import { User } from '../src/auth/models/user.class';
 
 describe('AuthController (e2e)', () => {
-  const authUrl = `http://localhost:3000/api-chat/auth`;
+  const authUrl = `http://localhost:3000/api/auth`;
 
   const mockUser: User = {
     firstName: 'firstName',
     lastName: 'lastName',
-    middleName: 'middleName',
-    email: 'email@teams.ru',
+    email: 'email@homtail.com',
     password: 'password',
   };
 
@@ -25,7 +25,7 @@ describe('AuthController (e2e)', () => {
           const { id, firstName, lastName, middleName, password, email, imagePath, role } =
             response.body;
 
-          expect(typeof id).toBe('number'),
+            expect(typeof id).toBe('number'),
             expect(firstName).toEqual(mockUser.firstName),
             expect(lastName).toEqual(mockUser.lastName),
             expect(middleName).toEqual(mockUser.middleName),
@@ -46,29 +46,31 @@ describe('AuthController (e2e)', () => {
     });
   });
 
-  it('it should not log in nor return a JWT for an unregistered user', () => {
-    return request(authUrl)
-      .post('/login')
-      .set('Accept', 'application/json')
-      .send({ email: 'doesnot@exist.com', password: 'password' })
-      .expect((response: request.Response) => {
-        const { token }: { token: string } = response.body;
+  describe('/auth/login (POST)', () => {
+    it('it should not log in nor return a JWT for an unregistered user', () => {
+      return request(authUrl)
+        .post('/login')
+        .set('Accept', 'application/json')
+        .send({ email: 'doesnot@exist.com', password: 'password' })
+        .expect((response: request.Response) => {
+          const { token }: { token: string } = response.body;
 
-        expect(token).toBeUndefined();
-      })
-      .expect(HttpStatus.FORBIDDEN);
-  });
+          expect(token).toBeUndefined();
+        })
+        .expect(HttpStatus.FORBIDDEN);
+    });
 
-  it('it should log in and return a JWT for a registered user', () => {
-    return request(authUrl)
-      .post('/login')
-      .set('Accept', 'application/json')
-      .send(mockUser)
-      .expect((response: request.Response) => {
-        const { token }: { token: string } = response.body;
+    it('it should log in and return a JWT for a registered user', () => {
+      return request(authUrl)
+        .post('/login')
+        .set('Accept', 'application/json')
+        .send(mockUser)
+        .expect((response: request.Response) => {
+          const { token }: { token: string } = response.body;
 
-        expect(jwt.verify(token, 'jwtsecret')).toBeTruthy();
-      })
-      .expect(HttpStatus.OK);
+          expect(jwt.verify(token, 'jwtsecret')).toBeTruthy();
+        })
+        .expect(HttpStatus.OK);
+    });
   });
 });
