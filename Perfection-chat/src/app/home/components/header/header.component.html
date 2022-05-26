@@ -36,8 +36,27 @@
                   </ion-badge>
                   <div>Оповещения</div>
               </ion-col>
-              <ion-col class="ion-hide-md-down" size="auto">
+              <ion-col
+              (click)="
+                this.connectionProfileService.friendRequests?.length > 0 &&
+                  presentFriendRequestPopover($event)
+              "
+              class="ion-hide-md-down"
+              size="auto">
               <ion-icon name="people"></ion-icon>
+              <ion-badge
+              color="danger"
+              style="
+                position: absolute;
+                margin-left: -5px;
+                margin-top: -5px;
+                height: 16px;
+                width: 16px;
+                border-radius: 9999px;
+              "
+            >
+              {{ this.connectionProfileService.friendRequests?.length || 0 }}
+            </ion-badge>
                     <div>Коллеги</div>
               </ion-col>
               <ion-col (click)="presentPopover($event)" size="auto">
