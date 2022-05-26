@@ -1,7 +1,16 @@
-import { FeedPostEntity } from '../../feed/models/post.entity'
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+
+import { FeedPostEntity } from '../../feed/models/post.entity';
 import { Role } from './role.enum';
 import { FriendRequestEntity } from './friend-request.entity';
+import { ConversationEntity } from 'src/chat/models/conversation.entity';
+import { MessageEntity } from 'src/chat/models/message.entity';
 
 @Entity('user')
 export class UserEntity {
@@ -14,17 +23,14 @@ export class UserEntity {
   @Column()
   lastName: string;
 
-  @Column()
-  middleName: string;
-
   @Column({ unique: true })
   email: string;
 
   @Column({ select: false })
   password: string;
 
-  // @Column({ nullable: true })
-  // imagePath: string;
+  @Column({ nullable: true })
+  imagePath: string;
 
   @Column({ type: 'enum', enum: Role, default: Role.USER })
   role: Role;
@@ -43,4 +49,13 @@ export class UserEntity {
     (friendRequestEntity) => friendRequestEntity.receiver,
   )
   receivedFriendRequests: FriendRequestEntity[];
+
+  @ManyToMany(
+    () => ConversationEntity,
+    (conversationEntity) => conversationEntity.users,
+  )
+  conversations: ConversationEntity[];
+
+  @OneToMany(() => MessageEntity, (messageEntity) => messageEntity.user)
+  messages: MessageEntity[];
 }

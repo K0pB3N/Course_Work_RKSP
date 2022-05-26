@@ -15,19 +15,6 @@ export class PostService {
     private authService: AuthService,
     private errorHandlerService: ErrorHandlerService
   ) {
-    // this.authService
-    //   .getUserImageName()
-    //   .pipe(
-    //     take(1),
-    //     tap(({ imageName }) => {
-    //       console.log(33, imageName);
-    //       const defaultImagePath = 'blank-profile-picture.png';
-    //       this.authService
-    //         .updateUserImagePath(imageName || defaultImagePath)
-    //         .subscribe();
-    //     })
-    //   )
-    //   .subscribe();
   }
 
   private httpOptions: { headers: HttpHeaders } = {
